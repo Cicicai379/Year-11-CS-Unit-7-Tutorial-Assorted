@@ -10,7 +10,7 @@ class AssortedTest {
     List findSumList2;
 
     @org.junit.jupiter.api.BeforeEach
-    void setUp() {
+     void setUp() {
         findSumList = new ArrayList<>();
         findSumList.add(12);
         findSumList.add("54");
