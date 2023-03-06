@@ -300,30 +300,23 @@ public class Assorted {
      */
     public static List<String> wildWest(List<String> directions) {
         List<String> ans= new ArrayList<String>();
-
-        for(int i = 0; i < directions.size()-1; i++) {
-            if((directions.get(i).equals("NORTH")  && directions.get(i+1).equals("SOUTH"))
-                    || (directions.get(i).equals("SOUTH") && directions.get(i+1).equals("NORTH"))
-                    || (directions.get(i).equals("EAST") && directions.get(i+1).equals("WEST"))
-                    || (directions.get(i).equals("WEST") && directions.get(i+1).equals("EAST"))){
-//                System.out.println(directions.get(i));
-                i++;
-            } else {
-                if(ans.isEmpty()){
-                    ans.add(directions.get(i));
-                    continue;
-                }
-               if(ans.get(ans.size() - 1).equals("NORTH") &&  directions.get(i).equals("SOUTH") ||
-                        ans.get(ans.size() - 1).equals("SOUTH") && directions.get(i).equals("NORTH") ||
-                        ans.get(ans.size() - 1).equals("WEST") && directions.get(i).equals("EAST") ||
-                        ans.get(ans.size() - 1).equals("EAST") && directions.get(i).equals("WEST")){
-                        ans.remove(ans.size() - 1);
-                } else {
-                    ans.add(directions.get(i));
+        String dir[][] = {{"NORTH", "SOUTH"}, {"EAST", "WEST"}, {"SOUTH", "NORTH"}, {"WEST", "EAST"}};
+        int i = 1;
+        while(i<directions.size()){
+            boolean re = false;
+            for (int j = 0; j < 4; j++){
+                if(directions.get(i)==dir[j][0] && directions.get(i-1)==dir[j][1]){
+                    directions.remove(i-1);
+                    directions.remove(i-1);
+                    i--;
+                    if(i<1) i=1;
+                    re = true;
                 }
             }
+            if(!re) i++;
         }
-        return ans;
+
+        return directions;
     }
 
     /**
